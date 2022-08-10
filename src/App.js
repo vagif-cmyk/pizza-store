@@ -1,11 +1,27 @@
+import { useState, useEffect } from "react";
 import "./scss/app.scss";
 import Header from "./components/Header";
 import Sort from "./components/Sort";
 import Categories from "./components/Categories";
 import PizzaBlock from "./components/PizzaBlock";
-import pizzas from "./assets/pizzas.json";
+
+const URL = "https://62f3e2e9b81dba4a013e2516.mockapi.io/items";
 
 function App() {
+
+  const [pizzas, setPizzas] = useState([]);
+
+  useEffect(() => {
+    fetch(URL)
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
+        setPizzas(res);
+      });
+  }, []);
+
   return (
     <div className="wrapper">
       <Header />
