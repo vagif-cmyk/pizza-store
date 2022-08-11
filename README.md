@@ -7,3 +7,4 @@ redux-tooltip
 routes
 ajax-fetch
 css-modules
+react-skeleton
