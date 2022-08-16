@@ -1,8 +1,8 @@
-@import './../variables';
+@import "./../variables";
 
 .header {
-  border-bottom: 1px solid $gray-line;
   padding: 40px 0;
+  border-bottom: 1px solid $gray-line;
 
   .container {
     display: flex;
@@ -27,6 +27,20 @@
 
     p {
       color: #7b7b7b;
+    }
+  }
+  @media (max-width: 720px) {
+    .container {
+      flex-direction: column;
+      text-align: center;
+      a {
+        margin-bottom: 10px;
+      }
+    }
+    &__logo {
+      img {
+        margin-right: 0;
+      }
     }
   }
 }
