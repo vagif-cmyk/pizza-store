@@ -1,7 +1,7 @@
-@import './variables';
-@import './libs/normalize';
+@import "./variables";
+@import "./libs/normalize";
 
-@import './components/all';
+@import "./components/all";
 
 body {
   background-color: $background;
@@ -14,25 +14,51 @@ body {
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;
+
+  @media (max-width: 538px) {
+    width: calc(100vw - 20px);
+    margin: 20px auto;
+  }
 }
 
 .content {
-  padding: 40px 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
 
   &__title {
     margin: 35px 0;
+    font-size: 42px;
   }
 
   &__items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 20px;
+
+    @media (max-width: 1440px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 1060px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 1300px) {
+      flex-direction: column;
+
+      .categories {
+        margin-bottom: 20px;
+      }
+    }
   }
 }
 
@@ -307,5 +333,8 @@ body {
       font-weight: 600;
       font-size: 18px;
     }
+  }
+  .content__items {
+    display: block;;
   }
 }
