@@ -48,6 +48,7 @@ body {
   }
 
   &__top {
+    padding-top: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -335,6 +336,6 @@ body {
     }
   }
   .content__items {
-    display: block;;
+    display: block;
   }
 }
