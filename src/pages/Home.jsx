@@ -5,17 +5,22 @@ import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "../components/Pagination";
 import { SearchContext } from "../App";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategoryId } from "../redux/slices/filterSlice";
 
 const Home = () => {
   const { searchValue } = useContext(SearchContext);
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortType, setSortType] = useState({
-    name: "популярности",
-    sortBy: "rating",
-  });
+
+  const { categoryId, sort } = useSelector((state) => state.filter);
+  const sortType = sort.sortBy;
+  const dispatch = useDispatch();
+
+  const onClickCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
 
   const items = pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
 
@@ -45,11 +50,8 @@ const Home = () => {
     <>
       <div className="container">
         <div className="content__top">
-          <Categories
-            value={categoryId}
-            onClickCategory={(id) => setCategoryId(id)}
-          />
-          <Sort value={sortType} onClickSort={(obj) => setSortType(obj)} />
+          <Categories value={categoryId} onClickCategory={onClickCategory} />
+          <Sort />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">{isLoading ? skeletons : items}</div>
