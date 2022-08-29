@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import Sort from "../components/Sort";
 import Categories from "../components/Categories";
 import PizzaBlock from "../components/PizzaBlock";
@@ -15,7 +16,6 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { categoryId, sort } = useSelector((state) => state.filter);
-  const sortType = sort.sortBy;
   const dispatch = useDispatch();
 
   const onClickCategory = (id) => {
@@ -25,11 +25,11 @@ const Home = () => {
   const items = pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
 
   const skeletons = [...new Array(8)].map((_, i) => <Skeleton key={i} />);
-  const sortAs = sortType.sortBy === "title" ? "asc" : "desc";
+  const sortAs = sort.sortBy === "title" ? "asc" : "desc";
 
   const URL = `https://62f3e2e9b81dba4a013e2516.mockapi.io/items?${
     categoryId > 0 ? `category=${categoryId}` : ""
-  }&sortBy=${sortType.sortBy}&order=${sortAs}${
+  }&sortBy=${sort.sortBy}&order=${sortAs}${
     searchValue ? `&search=${searchValue}` : ""
   }&page=${currentPage}&limit=4`;
 
@@ -44,7 +44,7 @@ const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, sort, searchValue, currentPage]);
 
   return (
     <>
