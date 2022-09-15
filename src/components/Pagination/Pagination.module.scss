@@ -1,0 +1,46 @@
+.root {
+  ul {
+    display: flex;
+    :global {
+      .selected {
+        background-color: #fe5f1e;
+        a {
+          color: #fff;
+        }
+      }
+      .disabled,
+      .disabled:hover {
+        border: none;
+        background-color: rgb(228, 225, 225);
+        opacity: 0.5;
+        a {
+          color: rgb(48, 46, 46);
+        }
+      }
+    }
+    li {
+      border-radius: 50%;
+      border: 1px solid #fe5f1e;
+      &:hover {
+        background-color: #fe5f1e;
+        a {
+          color: #fff;
+        }
+      }
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        color: #fe5f1e;
+      }
+    }
+    & :not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
